@@ -1,17 +1,14 @@
 <script lang="ts">
 import { createEventDispatcher } from 'svelte';
+import type { TTodo } from '../store/Store';
+
 const dispatch = createEventDispatcher();
-export let listItem: TListItem;
+export let listItem: TTodo;
 
 function remove() {
 	dispatch('remove', listItem.id);
 }
 
-type TListItem = {
-	id: number;
-	title: string;
-	text: string;
-};
 </script> 
 
 <template>

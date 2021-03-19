@@ -14,7 +14,7 @@ function addTodo() {
 	
 	isFormValid = true;
 	dispatch('addTodo', {
-		id: new Date().getTime(),
+		id: generateId(),
 		title: newTodoTitle,
 		text: newTodoText
 	});
@@ -24,6 +24,10 @@ function addTodo() {
 function reset() {
 	newTodoTitle = '';
 	newTodoText = '';
+}
+
+function generateId() {
+	return new Date().getTime();
 }
 
 </script>

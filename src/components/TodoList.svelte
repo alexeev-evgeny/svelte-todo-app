@@ -1,49 +1,33 @@
 <script lang="ts">
+import { todos, addTodo, removeTodo } from '../store/Store';
+import type { TTodo } from '../store/Store';
 import TodoListItem from './TodoListItem.svelte';
 import TodoListItemCreate from './TodoListItemCreate.svelte';
 
-let list = [
-	{
-		id: 1616150160176,
-		title: 'Number one',
-		text: 'Adasdasdadadasdadadad'
-	},
-	{
-		id: 1616150176804,
-		title: 'Number two',
-		text: 'Adasdasdadadasdadadad'
-	},
-	{
-		id: 1616150190615,
-		title: 'Number three',
-		text: 'Adasdasdadadasdadadad'
-	},
-];
-
-function addTodo(event: CustomEvent) {
-	const newTodo = event.detail;
-	list = [
-		...list,
-		newTodo
-	];
+function onAddTodo(event: IEvent<TTodo>) {
+	const { detail: newTodo } = event;
+	addTodo(newTodo);
 }
 
-function removeItem(event: CustomEvent) {
-	const itemId = event.detail;
-	list = [...list].filter(({ id }) => id !== itemId);
+function onRemoveTodo(event: IEvent<number>) {
+	const { detail: todoId } = event;
+	removeTodo(todoId);
 }
 
+interface IEvent<T> extends CustomEvent {
+	detail: T
+}
 </script>
 
 <template>
 <div class="row">
 	<div class="column">
 		<h2>Todos</h2>
-		{#if list.length}
-			{#each list as listItem}
-				<TodoListItem 
-					listItem="{listItem}"
-					on:remove="{removeItem}"
+		{#if $todos.length}
+			{#each $todos as todo}
+				<TodoListItem
+					listItem="{todo}"
+					on:remove="{onRemoveTodo}"
 				></TodoListItem>
 			{/each}
 		{:else}
@@ -51,7 +35,9 @@ function removeItem(event: CustomEvent) {
 		{/if}
 	</div>
 	<div class="column">
-		<TodoListItemCreate on:addTodo="{addTodo}"></TodoListItemCreate>
+		<TodoListItemCreate
+			on:addTodo="{onAddTodo}"
+		></TodoListItemCreate>
 	</div>
 </div>
 
