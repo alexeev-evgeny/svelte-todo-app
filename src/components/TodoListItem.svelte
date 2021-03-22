@@ -1,10 +1,10 @@
 <script lang="ts">
 import { createEventDispatcher } from 'svelte';
-import type { TTodo } from '../store/Store';
+import type { TTodo } from '../store/TodosStore';
 
 const dispatch = createEventDispatcher();
 export let listItem: TTodo;
-
+ 
 function remove() {
 	dispatch('remove', listItem.id);
 }

@@ -1,17 +1,19 @@
 <script lang="ts">
-import { todos, addTodo, removeTodo } from '../store/Store';
-import type { TTodo } from '../store/Store';
+import { TODOS_STORE } from '../store';
+import type { TTodo } from '../store/TodosStore';
 import TodoListItem from './TodoListItem.svelte';
 import TodoListItemCreate from './TodoListItemCreate.svelte';
 
+$: todos = TODOS_STORE.todosList;
+
 function onAddTodo(event: IEvent<TTodo>) {
 	const { detail: newTodo } = event;
-	addTodo(newTodo);
+	TODOS_STORE.addTodo(newTodo);
 }
 
 function onRemoveTodo(event: IEvent<number>) {
 	const { detail: todoId } = event;
-	removeTodo(todoId);
+	TODOS_STORE.removeTodo(todoId);
 }
 
 interface IEvent<T> extends CustomEvent {
