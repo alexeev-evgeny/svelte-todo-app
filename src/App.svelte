@@ -1,7 +1,8 @@
 <script lang="ts">
-import TodoList from './components/TodoList.svelte'
-</script>
-
-<main>
-	<TodoList></TodoList>
-</main>
+  import TodoList from './components/TodoList.svelte'
+  </script>
+  
+  <main>
+    <TodoList></TodoList>
+  </main>
+  
