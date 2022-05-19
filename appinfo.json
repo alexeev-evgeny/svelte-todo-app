@@ -1,0 +1,10 @@
+{
+  "id": "svelte-app",
+  "version": "0.0.1",
+  "vendor": "My Company",
+  "type": "web",
+  "main": "index.html",
+  "title": "svelte-app",
+  "icon": "icon.png",
+  "largeIcon": "largeIcon.png"
+}
